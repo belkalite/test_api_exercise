@@ -1,26 +1,13 @@
 import json
-import os
 
 from helpers.app import App
 import pytest
 
 
 @pytest.fixture(scope="session")
-def app(env, request):
-    with open(os.path.join("/home/anduser/Documents/test_exercise/test_api_exercise/configs", "app_config.json"), 'r') as config_file:
-        app_config = json.load(config_file)[env]
-        app = App(config=app_config)
-        return app
-
-
-def pytest_addoption(parser):
-    parser.addoption("--env", action="store", default="local",
-                     help="Environment to run tests")
-
-
-@pytest.fixture(scope="session")
-def env(request):
-    return request.config.getoption("--env")
+def app():
+    app = App()
+    return app
 
 
 @pytest.fixture()
