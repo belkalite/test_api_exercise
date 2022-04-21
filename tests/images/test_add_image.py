@@ -1,11 +1,13 @@
 import json
+import pytest
 
 from helpers.assert_helper import check_tags
-from test_data import image_body
+from test_data.test_data import image_body
 
 
 class TestAddImage:
 
+    @pytest.mark.smoke
     def test_user_can_create_image_record(self, app):
         response = app.http_api.post(url="/images",
                                      body=json.dumps(image_body),

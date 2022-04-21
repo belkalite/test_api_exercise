@@ -1,7 +1,9 @@
-from helpers.assert_helper import check_tags
+import pytest
 
 
 class TestGetImage:
+
+    @pytest.mark.smoke
     def test_user_can_get_one_image_by_id(self, app, image_record):
         id, filename, tags = image_record
         response = app.http_api.get(f"/images/{id}")
@@ -17,6 +19,7 @@ class TestGetImage:
         response = app.http_api.get("/images/0", expected_code=404)
         assert response.json() != {}, "Wrong response body"
 
+    @pytest.mark.smoke
     def test_user_can_get_all_images(self, app):
         response = app.http_api.get(f"/images")
         app.checkers.check_json_has_key(response, "meta")

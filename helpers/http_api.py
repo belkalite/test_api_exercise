@@ -1,5 +1,5 @@
 import requests
-from test_data import request_headers
+from test_data.test_data import request_headers
 
 
 def api_method(default_expected_code: int = 200):

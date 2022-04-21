@@ -1,7 +1,10 @@
 import json
+import pytest
 
 
 class TestUpdateImage:
+
+    @pytest.mark.smoke
     def test_user_can_update_image_tags(self, app, image_record):
         id, _, tags = image_record
         new_tag = "foo"

@@ -1,9 +1,12 @@
 import json
+import pytest
 
-from test_data import new_tag
+from test_data.test_data import new_tag
 
 
 class TestUpdateTag:
+
+    @pytest.mark.smoke
     def test_user_can_update_tag(self, app, tag):
         response = app.http_api.put(
             url=f"/tags/{tag}",

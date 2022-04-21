@@ -23,6 +23,12 @@ Run tests locally:
 python3 -m pytest tests
 ```
 
+Run smoke tests locally:
+
+```shell
+python3 -m pytest tests -m smoke
+```
+
 ## Limitations
 
 - Trigger test run by commit to image tagging system repository are planned to be implemented. 

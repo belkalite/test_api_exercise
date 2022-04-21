@@ -2,7 +2,7 @@ import json
 import pytest
 
 from helpers.app import App
-from test_data import tag_name
+from test_data.test_data import tag_name
 
 
 @pytest.fixture(scope="session")
