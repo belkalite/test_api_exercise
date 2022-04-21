@@ -1,4 +1,5 @@
 import requests
+from test_data import request_headers
 
 
 def api_method(default_expected_code: int = 200):
@@ -6,8 +7,6 @@ def api_method(default_expected_code: int = 200):
         def wrapped(self, *args, **kwargs):
             expected_code = kwargs.pop("expected_code", default_expected_code)
             response = func(self, *args, **kwargs)
-            # app.log.error(f"{app.current_request.method} {app.current_request.path}")
-
             if response.status_code != expected_code:
                 raise AssertionError("Expected status code: {} but was {}.".format(expected_code, response.status_code))
             return response
@@ -29,14 +28,14 @@ class HttpApi:
 
     # @staticmethod
     @api_method(default_expected_code=201)
-    def post(self, url: str, body: dict = None, json: dict = None, headers: dict = None):
+    def post(self, url: str, body: dict = None, json: dict = None, headers: dict = request_headers):
         full_url = self.base_url + url
         print(full_url)
         response = requests.post(url=full_url, data=body, json=json, headers=headers)
         return response
 
     @api_method()
-    def put(self, url: str, body: dict = None, json: dict = None, headers: dict = None):
+    def put(self, url: str, body: dict = None, json: dict = None, headers: dict = request_headers):
         full_url = self.base_url + url
         response = requests.put(url=full_url, data=body, json=json, headers=headers)
         return response

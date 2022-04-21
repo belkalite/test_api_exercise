@@ -18,7 +18,6 @@ def image_record(app) -> object:
     image_data = {"filename": filename, "size": size, "tags": tags}
     response = app.http_api.post(url="/images",
                                  body=json.dumps(image_data),
-                                 headers={"Content-Type": "application/json"},
-                                 expected_code=200).json()  # TODO remove
+                                 expected_code=200).json()  # TODO remove when status codes are fixed
     id = response["id"]
     yield id, filename, tags
