@@ -26,11 +26,9 @@ class HttpApi:
         response = requests.get(url=full_url)
         return response
 
-    # @staticmethod
     @api_method(default_expected_code=201)
     def post(self, url: str, body: dict = None, json: dict = None, headers: dict = request_headers):
         full_url = self.base_url + url
-        print(full_url)
         response = requests.post(url=full_url, data=body, json=json, headers=headers)
         return response
 

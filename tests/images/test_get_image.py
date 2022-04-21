@@ -1,3 +1,5 @@
+from helpers.assert_helper import check_tags
+
 
 class TestGetImage:
     def test_user_can_get_one_image_by_id(self, app, image_record):
@@ -12,7 +14,8 @@ class TestGetImage:
             assert (item for item in tags_list if item["name"] == tag), "Created image has wrong tag name"
 
     def test_cannot_get_image_not_exists(self, app):
-        app.http_api.get("/images/0", expected_code=404)
+        response = app.http_api.get("/images/0", expected_code=404)
+        assert response.json() != {}, "Wrong response body"
 
     def test_user_can_get_all_images(self, app):
         response = app.http_api.get(f"/images")

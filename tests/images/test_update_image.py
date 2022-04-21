@@ -7,16 +7,15 @@ class TestUpdateImage:
         new_tag = "foo"
         response = app.http_api.put(
             url=f"/images/{id}",
-            body=json.dumps({"tags": [new_tag]}),
-            headers={"Content-Type": "application/json"}
+            body=json.dumps({"tags": [new_tag]})
         ).json()
         tags_list = response["tags"]
         assert (item for item in tags_list if item["name"] == "foo"), "Tag was not updated"
 
     def test_cannot_update_image_not_exists(self, app):
         new_tag = "foo"
-        app.http_api.put(
+        response = app.http_api.put(
             url=f"/images/0",
             body=json.dumps({"tags": [new_tag]}),
-            headers={"Content-Type": "application/json"},
             expected_code=404)
+        assert response.json() != {}, "Wrong response body"

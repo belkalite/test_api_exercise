@@ -1,7 +1,8 @@
 import json
+import pytest
 
 from helpers.app import App
-import pytest
+from test_data import tag_name
 
 
 @pytest.fixture(scope="session")
@@ -21,3 +22,14 @@ def image_record(app) -> object:
                                  expected_code=200).json()  # TODO remove when status codes are fixed
     id = response["id"]
     yield id, filename, tags
+
+
+@pytest.fixture()
+def tag(app) -> object:
+    response = app.http_api.post(
+        url=f"/tags/",
+        body=json.dumps({"name": tag_name}),
+        expected_code=200  # TODO remove when status codes are fixed
+    ).json()
+    tag_id = response["id"]
+    yield tag_id
