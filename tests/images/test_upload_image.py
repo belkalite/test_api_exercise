@@ -12,8 +12,7 @@ class TestUploadImage:
         image_body = image_body_with_decoded_image()
         response = app.http_api.post(
             "/upload",
-            body=json.dumps(image_body),
-            expected_code=201  # TODO remove when status codes are fixed
+            body=json.dumps(image_body)
         )
         assert response.json()["url"].startswith("http"), "Url has wrong format"
         app.checkers.check_json_has_key(response, "id")

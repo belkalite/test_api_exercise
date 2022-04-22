@@ -10,8 +10,7 @@ class TestAddImage:
     @pytest.mark.smoke
     def test_user_can_create_image_record(self, app):
         response = app.http_api.post(url="/images",
-                                     body=json.dumps(image_body),
-                                     expected_code=201,  # TODO remove when status codes are fixed
+                                     body=json.dumps(image_body)
                                      )
         assert response.json()["upload_url"].startswith("http"), "Upload url has wrong format"
 
